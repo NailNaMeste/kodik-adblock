@@ -1,0 +1,29 @@
+/* VPAID / VAST chrome inside Kodik player */
+#vpaid_iframe,
+#vpaid_div,
+#vpaid_video,
+#vpaid_play_button,
+.vast-html,
+.vast-image,
+.vast-warning,
+iframe[src*="buzzoola"],
+iframe[src*="vpaid"],
+iframe[src*="vast"],
+a[href*="targetads.io"],
+a[href*="eye.targetads"],
+script[src*="adsbygoogle"] {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+}
+
+a[target="_blank"][style*="position: absolute"][style*="width: 100%"],
+a[target="_blank"][style*="position:absolute"][style*="width:100%"],
+a[target="_blank"][style*="position: absolute"][style*="height: 100%"],
+a[target="_blank"][style*="position:absolute"][style*="height:100%"] {
+  display: none !important;
+  pointer-events: none !important;
+}
