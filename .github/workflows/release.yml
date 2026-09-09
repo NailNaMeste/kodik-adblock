@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build zip
+        run: |
+          mkdir -p kodik-adblock
+          cp background.js content.css content.js inject.js manifest.json rules.json kodik-adblock/
+          cp -r icons kodik-adblock/
+          zip -r "kodik-adblock-${GITHUB_REF_NAME#v}.zip" kodik-adblock
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Kodik AdBlock ${{ github.ref_name }}
+          files: kodik-adblock-*.zip
+          body: |
+            ## Установка
+            1. Скачайте `kodik-adblock-*.zip`
+            2. Распакуйте архив
+            3. `chrome://extensions` → Режим разработчика → Загрузить распакованное → выберите папку `kodik-adblock`
